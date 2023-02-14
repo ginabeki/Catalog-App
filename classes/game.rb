@@ -9,6 +9,8 @@ require 'date'
 # @param archived (optional) to state if the game was already archived or not
 
 class Game < Item
+  attr_accessor :multiplayer, :last_played_at
+
   def initialize(multiplayer, last_played_at, publish_date, archived: false)
     super(publish_date, archived)
     @multiplayer = multiplayer
