@@ -38,6 +38,7 @@ class Item
   # @param author is the author object
   def add_author(author)
     @author = author
+    author.items << self
   end
 
   # move_to_archive change the value of archived if the item
