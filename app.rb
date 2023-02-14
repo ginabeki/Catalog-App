@@ -16,6 +16,7 @@ class App
   9. Add a game
  10. Exit"
   end
+
   # this method calls specifc method depending on the user selection
   def selection_cases
     cases = { 1 => :list_book,
@@ -40,6 +41,7 @@ class App
       send(method)
     end
   end
+
   # ask user for input
   # @return the input
   def input
