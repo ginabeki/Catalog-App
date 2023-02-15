@@ -1,7 +1,11 @@
 # App is responsible for holding the logic for our app UI
-
+require './classes/handle_musicalbum'
 class App
   # menu_list provides a list of different options a user can select from
+  def initialize
+    @handle_musicalbum = HandleMusicAlbum.new
+  end
+
   def menu_list
     puts "\nWelcome to our Catalog app"
     puts "Please choose options below:
@@ -51,7 +55,7 @@ class App
         break
       end
       if method == :list_genres
-        
+        @handle_musicalbum.list_genres
         puts 'Thanks for using this app'
         break
       end

@@ -11,6 +11,7 @@ class HandleMusicAlbum
 
   # Create Music Album & Genre
   def create_music_album
+   
     print 'Publish date of the album [Enter date in format (yyyy-mm-dd)]: '
     publish_date = Date.parse(gets.chomp)
     return unless publish_date
@@ -24,11 +25,9 @@ class HandleMusicAlbum
     print 'Do you want to add genre? [Y/N]: '
     perm = gets.chomp.downcase == 'y' || false
     if perm
-      puts 'Please, type the genre id '
-      id = gets.chomp
       puts 'Please, type the genre name '
       g_name = gets.chomp
-      @genres << Genre.new(id,g_name)
+      @genres << Genre.new(g_name)
       puts 'Music album and Genre created successfully'
     else
       puts 'Music Album created successfully'
@@ -54,7 +53,7 @@ class HandleMusicAlbum
   def load_genres
     if File.exist?('./json_data/genre.json') && File.read('./json_data/genre.json') != ''
       JSON.parse(File.read('./json_data/genre.json')).map do |genre|
-        Genre.new(genre['name'])
+        Genre.new(name: genre['name'])
       end
     else
       []
@@ -83,7 +82,7 @@ class HandleMusicAlbum
   def save_albums
     data = []
     @albums.each do |album|
-      data.push({ album.name, album.publish_date, album.on_spotify })
+      data.push({ name: album.name, publish_date: album.publish_date, spotify: album.on_spotify })
     end
     open('./json_data/album.json', 'w') { |f| f << JSON.pretty_generate(data) }
   end
