@@ -1,7 +1,8 @@
 require './spec/spec_helper'
+require 'date'
 describe Book do
   before :all do
-    @book = Book.new('Literature', 'good', 12 / 10 / 2022)
+    @book = Book.new('Literature', 'good', '2012-06-12')
   end
 
   describe '#new' do
@@ -18,7 +19,7 @@ describe Book do
     expect(@book.cover_state).to eq 'good'
   end
 
-#   it 'should return publish_date' do
-#     expect(@book.publish_date).to eq 12 / 10 / 2022
-#   end
+  it 'should return publish_date' do
+    expect(@book.publish_date).to eq Date.parse('2012-06-12')
+  end
 end
