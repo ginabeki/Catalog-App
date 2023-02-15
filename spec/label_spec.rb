@@ -18,5 +18,4 @@ describe Label do
   it 'should return cover_state' do
     expect(@label.color).to eq 'red'
   end
-
 end
