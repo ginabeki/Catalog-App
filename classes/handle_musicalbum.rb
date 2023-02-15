@@ -37,7 +37,6 @@ class HandleMusicAlbum
   # List Albums and Genres
   def list_albums
     @albums.each do |album|
-      puts "\nName: #{album.name}"
       puts "Publish Date: #{album.publish_date}"
       puts "On Spotify: #{album.on_spotify}"
     end
@@ -53,7 +52,7 @@ class HandleMusicAlbum
   def load_genres
     if File.exist?('./json_data/genre.json') && File.read('./json_data/genre.json') != ''
       JSON.parse(File.read('./json_data/genre.json')).map do |genre|
-        Genre.new(name: genre['name'])
+        Genre.new(genre['name'])
       end
     else
       []
@@ -72,7 +71,7 @@ class HandleMusicAlbum
   def load_albums
     if File.exist?('./json_data/album.json') && File.read('./json_data/album.json') != ''
       JSON.parse(File.read('./json_data/album.json')).map do |album|
-        MusicAlbum.new(album['name'], album['publish_date'], album['spotify'])
+        MusicAlbum.new( album['publish_date'], album['spotify'])
       end
     else
       []
@@ -82,7 +81,7 @@ class HandleMusicAlbum
   def save_albums
     data = []
     @albums.each do |album|
-      data.push({ name: album.name, publish_date: album.publish_date, spotify: album.on_spotify })
+      data.push({ publish_date: album.publish_date, spotify: album.on_spotify })
     end
     open('./json_data/album.json', 'w') { |f| f << JSON.pretty_generate(data) }
   end

@@ -46,6 +46,8 @@ class App
       end
       if method == :add_music_album
         @handle_musicalbum.create_music_album
+        @handle_musicalbum.save_genres
+        @handle_musicalbum.save_albums
         puts 'Thanks for using this app'
         break
       end
