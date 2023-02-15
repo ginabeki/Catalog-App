@@ -1,6 +1,8 @@
+require_relative 'utilities/game_utility'
 # App is responsible for holding the logic for our app UI
 
 class App
+  include GameUtility
   # menu_list provides a list of different options a user can select from
   def menu_list
     puts "\nWelcome to our Catalog app"
