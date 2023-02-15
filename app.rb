@@ -35,6 +35,23 @@ class App
       selection = input
       method = cases[selection]
       if method == :exit
+        @handle_musicalbum.save_genres
+        @handle_musicalbum.save_albums
+        puts 'Thanks for using this app'
+        break
+      end
+      if method == :add_music_album
+        @handle_musicalbum.create_music_album
+        puts 'Thanks for using this app'
+        break
+      end
+      if method == :list_music_albums
+        @handle_musicalbum.list_albums
+        puts 'Thanks for using this app'
+        break
+      end
+      if method == :list_genres
+        
         puts 'Thanks for using this app'
         break
       end
