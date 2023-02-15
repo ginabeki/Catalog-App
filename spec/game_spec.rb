@@ -1,4 +1,5 @@
 require_relative '../classes/game'
+require 'date'
 
 describe Game do
   before :all do
@@ -19,6 +20,6 @@ describe Game do
   end
 
   it 'should return publish date of 2020/11/07' do
-    expect(@game1.publish_date).to eq('2020/11/07')
+    expect(@game1.publish_date).to eq Date.parse('2020/11/07')
   end
 end

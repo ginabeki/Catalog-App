@@ -50,6 +50,7 @@ class Item
   private
 
   def can_be_archived?
-    publish_date > 10
+    current_year = Time.new.year
+    current_year - @publish_date.year > 10
   end
 end
