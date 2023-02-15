@@ -1,5 +1,4 @@
 require './classes/music_album'
-require 'date'
 
 describe MusicAlbum do
   context 'should create a music album' do
