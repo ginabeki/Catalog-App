@@ -8,7 +8,7 @@
 # @publish_date is the published date of item.
 
 class Item
-  attr_reader :genre, :author, :source, :label, :archived
+  attr_reader :genre, :author, :source, :label, :archived, :publish_date
 
   def initialize(publish_date, archived: false)
     @id = Random.rand(1..10_000)
