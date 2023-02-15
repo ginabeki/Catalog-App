@@ -6,13 +6,13 @@
 # @label is the title of item. ie: album
 # @archived is the boolean value of item.
 # @publish_date is the published date of item.
-
+require 'date'
 class Item
   attr_reader :genre, :author, :source, :label, :archived, :publish_date
 
   def initialize(publish_date, archived: false)
     @id = Random.rand(1..10_000)
-    @publish_date = publish_date
+    @publish_date = Date.parse(publish_date)
     @archived = archived
   end
 
@@ -38,6 +38,7 @@ class Item
   # @param author is the author object
   def add_author(author)
     @author = author
+    author.items << self
   end
 
   # move_to_archive change the value of archived if the item
