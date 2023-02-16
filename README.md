@@ -59,6 +59,10 @@
 
 <!-- Features -->
 
+### Live Demo
+Here is our [Project Demonstration](https://drive.google.com/file/d/1fNbR7qRk2IRTqIK_1MRUqEWLOV4nMGam/view?usp=sharing) video
+
+
 ### Key Features <a name="key-features"></a>
 
 - **Can add items**
@@ -80,7 +84,6 @@ Clone this repository to your desired folder:
   cd PATH
   git clone git@github.com:ginabeki/Catalog-App.git
 ```
--
 
 ### Install
 
@@ -90,7 +93,6 @@ Install this project with:
   cd Catalog-App
   gem install
 ```
--
 
 ### Usage
 
@@ -99,7 +101,6 @@ To run the project, execute the following command:
 ```sh
   ruby main.rb
 ```
--
 
 ### Run tests
 
