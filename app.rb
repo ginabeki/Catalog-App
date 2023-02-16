@@ -3,6 +3,20 @@ require_relative 'utilities/game_utility'
 
 class App
   include GameUtility
+  attr_reader :cases
+
+  def initialize
+    @cases = { 1 => :list_book,
+               2 => :list_music_albums,
+               3 => :list_games,
+               4 => :list_genres,
+               5 => :list_labels,
+               6 => :list_authors,
+               7 => :add_book,
+               8 => :add_music_album,
+               9 => :add_game,
+               10 => :exit }
+  end
 
   # menu_list provides a list of different options a user can select from
   def menu_list
@@ -22,23 +36,13 @@ class App
 
   # this method calls specifc method depending on the user selection
   def selection_cases
-    cases = { 1 => :list_book,
-              2 => :list_music_albums,
-              3 => :list_games,
-              4 => :list_genres,
-              5 => :list_labels,
-              6 => :list_authors,
-              7 => :add_book,
-              8 => :add_music_album,
-              9 => :add_game,
-              10 => :exit }
-
     loop do
       menu_list
       selection = input
-      method = cases[selection]
+      method = @cases[selection]
       if method == :exit
         puts 'Thanks for using this app'
+        write_games
         break
       end
       send(method)

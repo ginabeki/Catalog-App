@@ -2,6 +2,12 @@ require_relative '../classes/game'
 require_relative '../app'
 require_relative 'author_utility'
 require 'date'
+require 'fileutils'
+require 'json'
+
+FileUtils.mkdir_p('json_data')
+base = "#{Dir.pwd}/json_data"
+File.open("#{base}/games.json", 'w') unless File.exist?("#{base}/games.json")
 
 ##
 # This module contains utlity methods for the user to
@@ -71,6 +77,17 @@ When was the last time you played the game.Enter a date format. hint : 2023/02/1
     GameUtility.games.each do |game|
       puts "Multiplayer: #{game.multiplayer}, Last Played: #{game.last_played_at}"
     end
+  end
+
+  # Persist data to JSON
+  def write_games
+    games = GameUtility.games
+    base = "#{Dir.pwd}/json_data"
+    empty_array = []
+    games&.each do |e|
+      empty_array << { multiplayer: e.multiplayer, last_played_at: e.last_played_at, publish_date: e.publish_date }
+    end
+    File.write("#{base}/games.json", empty_array.to_json, mode: 'w')
   end
 
   # Utility method to convert the input string into Date format
