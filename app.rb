@@ -1,10 +1,15 @@
+require_relative 'utilities/game_utility'
 # App is responsible for holding the logic for our app UI
 require './classes/book_label'
 
 class App
+
+  include GameUtility
+
   def initialize
     @book_label = BookLabel.new
   end
+
 
   # menu_list provides a list of different options a user can select from
   def menu_list
