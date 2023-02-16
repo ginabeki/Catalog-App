@@ -43,6 +43,7 @@ class App
       if method == :exit
         puts 'Thanks for using this app'
         write_games
+        write_authors
         break
       end
       send(method)
