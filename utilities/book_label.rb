@@ -1,30 +1,29 @@
-require_relative 'book'
-require_relative 'label'
+require_relative '../classes/book'
+require_relative '../classes/label'
 
-class BookLabel
-  attr_reader :books, :labels
-
-  def initialize
-    @books = []
-    @labels = []
+module BookLabel
+  @books = []
+  @labels = []
+  class << self
+    attr_accessor :books, :labels
   end
 
   def list_books
-    if @books.empty?
+    if BookLabel.books.empty?
       puts 'No book found, you can add one by typing option 7.'
       return
     end
-    @books.each do |book|
+    BookLabel.books.each do |book|
       puts "Publisher: #{book.publisher}, Cover_State: #{book.cover_state}, Publish_Date: #{book.publish_date}"
     end
   end
 
   def list_labels
-    if @labels.empty?
+    if BookLabel.labels.empty?
       puts 'No label found!'
       return
     end
-    @labels.each { |label| puts "Title: #{label.title}, Color: #{label.color}" }
+    BookLabel.labels.each { |label| puts "Title: #{label.title}, Color: #{label.color}" }
   end
 
   def add_book
@@ -42,21 +41,17 @@ class BookLabel
     label = Label.new(title, color)
     label.add_item(book)
 
-    @books << book
-    @labels << label
+    BookLabel.books << book
+    BookLabel.labels << label
     puts "Book added with id: #{book.id}"
   end
 
   def save_books_data
-    if @books.empty?
-      puts 'There are no books to save'
-      return
-    end
-    if File.file?('data/book.json')
-      existing_books = JSON.parse(File.read('data/book.json'), symbolize_names: true)
+    if File.file?('json_data/book.json')
+      existing_books = JSON.parse(File.read('json_data/book.json'), symbolize_names: true)
       last_book = existing_books.last
       last_book_id = last_book[:ID]
-      new_books = @books.map do |book|
+      new_books = BookLabel.books.map do |book|
         {
           ID: last_book_id + book.id,
           Publisher: book.publisher,
@@ -66,7 +61,7 @@ class BookLabel
       end
       all_books = existing_books + new_books
     else
-      all_books = @books.map do |book|
+      all_books = BookLabel.books.map do |book|
         {
           ID: book.id,
           Publisher: book.publisher,
@@ -75,24 +70,17 @@ class BookLabel
         }
       end
     end
-    File.write('data/book.json', JSON.pretty_generate(all_books))
-    puts 'Books data saved successfully'
+    File.write('json_data/book.json', JSON.pretty_generate(all_books))
   end
 
   def save_labels_data
-    if @labels.empty?
-      puts 'There are no labels to save'
-      return
-    end
-
-    filename = 'data/label.json'
+    filename = 'json_data/label.json'
     existing_data = File.exist?(filename) ? JSON.parse(File.read(filename)) : []
 
-    labels_hash = @labels.map(&:to_custom_hash)
+    labels_hash = BookLabel.labels.map(&:to_custom_hash)
 
     merged_data = existing_data.concat(labels_hash).uniq { |label| [label['Title'], label['Color']] }
 
     File.write(filename, JSON.pretty_generate(merged_data))
-    puts 'Labels data saved successfully'
   end
 end

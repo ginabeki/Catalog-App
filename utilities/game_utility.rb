@@ -47,7 +47,7 @@ module GameUtility
     new_game = Game.new(multiplayer, last_played_at, publish_date)
     new_game.add_author(new_author) if new_author.instance_of?(Item)
     games.push(new_game)
-    puts "Variable games #{games}"
+    puts 'Game added successfully!'
   end
 
   # Checks if the user typed the correct input

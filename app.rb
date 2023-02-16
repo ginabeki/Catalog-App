@@ -1,18 +1,13 @@
 # App is responsible for holding the logic for our app UI
 require_relative 'utilities/game_utility'
-require './classes/handle_musicalbum'
-require './classes/book_label'
+require_relative 'utilities/handle_musicalbum'
+require_relative 'utilities/book_label'
 class App
   include GameUtility
-  attr_reader :cases
-  def initialize
-    @book_label = BookLabel.new
-  end
+  include BookLabel
+  include HandleMusicAlbum
 
   # menu_list provides a list of different options a user can select from
-  def initialize
-    @handle_musicalbum = HandleMusicAlbum.new
-  end
 
   def menu_list
     puts "\nWelcome to our Catalog app"
@@ -35,32 +30,19 @@ class App
     loop do
       menu_list
       selection = input
-      method = @cases[selection]
+      until (1..10).include? selection
+        puts 'Wrong answer, please choose a number between 1-10: '
+        selection = input
+      end
+      method = cases[selection]
       if method == :exit
-        @handle_musicalbum.save_genres
-        @handle_musicalbum.save_albums
-        puts 'Thanks for using this app'
-        break
-      end
-      if method == :add_music_album
-        @handle_musicalbum.create_music_album
-        @handle_musicalbum.save_genres
-        @handle_musicalbum.save_albums
-        puts 'Thanks for using this app'
-        break
-      end
-      if method == :list_music_albums
-        @handle_musicalbum.list_albums
-        puts 'Thanks for using this app'
-        break
-      end
-      if method == :list_genres
-        @handle_musicalbum.list_genres
         puts 'Thanks for using this app'
         write_games
         write_authors
-        @book_label.save_books_data
-        @book_label.save_labels_data
+        save_books_data
+        save_labels_data
+        save_genres
+        save_albums
         break
       end
       send(method)
@@ -86,25 +68,5 @@ class App
   # @return the input
   def input
     gets.chomp.to_i
-  end
-
-  def list_books
-    @book_label.list_books
-  end
-
-  def list_labels
-    @book_label.list_labels
-  end
-
-  def add_book
-    @book_label.add_book
-  end
-
-  def save_books_data
-    @book_label.save_books_data
-  end
-
-  def save_labels_data
-    @book_label.save_labels_data
   end
 end
