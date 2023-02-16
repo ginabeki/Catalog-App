@@ -1,4 +1,6 @@
 require_relative '../classes/game'
+require_relative '../app'
+require_relative 'author_utility'
 require 'date'
 
 ##
@@ -7,11 +9,17 @@ require 'date'
 # List Games
 # Write Games
 module GameUtility
+  include AuthorUtility
+  @games = []
+  class << self
+    attr_accessor :games
+  end
   # Asks user if the game is
   # a multiplayer game? Expected result : true or false
   # when was the last time played? Expected result : Date. ie: 2022/01/01
   # When the game got published? Expected result : Date. ie: 2019-05-02
   def add_game
+    games = GameUtility.games
     multiplayer = check_multiplayer(
       ask_question('Is it a multiplayer game? Y or N?')
     )
@@ -21,7 +29,11 @@ module GameUtility
     publish_date = check_publish_date(
       ask_question('When was the game published?. Hint : 2010/01/01')
     )
-    puts Game.new(multiplayer, last_played_at, publish_date).publish_date
+    new_author = add_author
+    new_game = Game.new(multiplayer, last_played_at, publish_date)
+    new_game.add_author(new_author) if new_author.instance_of?(Item)
+    games.push(new_game)
+    puts "Variable games #{games}"
   end
 
   # Checks if the user typed the correct input
@@ -52,6 +64,13 @@ When was the last time you played the game.Enter a date format. hint : 2023/02/1
       result = convert_date(response)
     end
     result
+  end
+
+  # list games
+  def list_games
+    GameUtility.games.each do |game|
+      puts "Multiplayer: #{game.multiplayer}, Last Played: #{game.last_played_at}"
+    end
   end
 
   # Utility method to convert the input string into Date format
