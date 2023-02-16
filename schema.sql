@@ -1,3 +1,4 @@
+
 -- Create Author table 
 CREATE TABLE Author {
   id INTEGER GENERATED ALWAYS AS IDENTITY,
@@ -5,6 +6,14 @@ CREATE TABLE Author {
   last_name VARCHAR(100),
   PRIMARY KEY(id)
 };
+
+-- Create Label table
+CREATE TABLE label (
+	id  INT GENERATED ALWAYS AS IDENTITY,
+	title VARCHAR(50),
+    color VARCHAR(50),
+	PRIMARY KEY(id)
+);
 
 -- Create Item table
 CREATE TABLE item (
@@ -29,4 +38,12 @@ CREATE TABLE Game {
   PRIMARY KEY(id),
   CONSTRAINT fk_item FOREIGN KEY(item_id) references item(id) ON DELETE CASCADE
 };
+
+-- Create Book table
+CREATE TABLE book (
+	id INT,
+  publisher VARCHAR(100),
+	cover_state VARCHAR(50),
+	FOREIGN KEY(id) REFERENCES item(id)
+);
 
