@@ -16,7 +16,15 @@ File.open("#{base}/games.json", 'w') unless File.exist?("#{base}/games.json")
 # Write Games
 module GameUtility
   include AuthorUtility
+  base = "#{Dir.pwd}/json_data"
+  games_reader = File.read("#{base}/games.json")
   @games = []
+
+  unless games_reader == ''
+    JSON.parse(games_reader).each do |x|
+      @games.push(Game.new(x['multiplayer'], x['last_played_at'], x['publish_date']))
+    end
+  end
   class << self
     attr_accessor :games
   end
