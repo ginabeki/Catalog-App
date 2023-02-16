@@ -2,10 +2,33 @@ require_relative '../classes/book'
 require_relative '../classes/label'
 
 module BookLabel
-  @books = []
-  @labels = []
   class << self
     attr_accessor :books, :labels
+  end
+
+  def self.load_books_data
+    return unless File.exist?('json_data/book.json')
+
+    books_data = JSON.parse(File.read('json_data/book.json'), symbolize_names: true)
+    BookLabel.books = books_data.map do |book_data|
+      Book.new(book_data[:Publisher], book_data[:Cover_State], book_data[:Publish_Date])
+    end
+  end
+
+  def self.load_labels_data
+    return unless File.exist?('json_data/label.json')
+
+    labels_data = JSON.parse(File.read('json_data/label.json'), symbolize_names: true)
+    BookLabel.labels = labels_data.map do |label_data|
+      label = Label.new(label_data[:Title], label_data[:Color])
+      if label_data[:Items]
+        label_data[:Items].each do |book_id|
+          book = BookLabel.books.find { |b| b.id == book_id }
+          label.add_item(book) if book
+        end
+      end
+      label
+    end
   end
 
   def list_books
@@ -83,4 +106,6 @@ module BookLabel
 
     File.write(filename, JSON.pretty_generate(merged_data))
   end
+  @books = load_books_data
+  @labels = load_labels_data
 end
