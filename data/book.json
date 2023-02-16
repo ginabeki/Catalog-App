@@ -1,0 +1,68 @@
+[
+  {
+    "ID": 9234,
+    "Publisher": "Green Media",
+    "Cover_State": "Good",
+    "Publish_Date": "2003-01-22"
+  },
+  {
+    "ID": 9718,
+    "Publisher": "Hikers",
+    "Cover_State": "Good",
+    "Publish_Date": "2013-04-30"
+  },
+  {
+    "ID": 12799,
+    "Publisher": "Adventures",
+    "Cover_State": "Great",
+    "Publish_Date": "2023-01-01"
+  },
+  {
+    "ID": 20080,
+    "Publisher": "Farmer's choice",
+    "Cover_State": "Awesome",
+    "Publish_Date": "2014-10-17"
+  },
+  {
+    "ID": 27136,
+    "Publisher": "Farmer's choice",
+    "Cover_State": "Great",
+    "Publish_Date": "2014-10-17"
+  },
+  {
+    "ID": 31421,
+    "Publisher": "Writers stream",
+    "Cover_State": "Awesome",
+    "Publish_Date": "2011-10-09"
+  },
+  {
+    "ID": 36250,
+    "Publisher": "Media creation",
+    "Cover_State": "Great",
+    "Publish_Date": "2006-04-12"
+  },
+  {
+    "ID": 37254,
+    "Publisher": "Global media",
+    "Cover_State": "great",
+    "Publish_Date": "2006-04-17"
+  },
+  {
+    "ID": 39248,
+    "Publisher": "sdhj",
+    "Cover_State": "great",
+    "Publish_Date": "2006-02-22"
+  },
+  {
+    "ID": 44299,
+    "Publisher": "Creative",
+    "Cover_State": "great",
+    "Publish_Date": "2020-10-05"
+  },
+  {
+    "ID": 46737,
+    "Publisher": "Max",
+    "Cover_State": "Good",
+    "Publish_Date": "2006-10-13"
+  }
+]
