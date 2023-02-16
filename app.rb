@@ -3,13 +3,11 @@ require_relative 'utilities/game_utility'
 require './classes/book_label'
 
 class App
-
   include GameUtility
-
+  attr_reader :cases
   def initialize
     @book_label = BookLabel.new
   end
-
 
   # menu_list provides a list of different options a user can select from
   def menu_list
@@ -33,9 +31,11 @@ class App
     loop do
       menu_list
       selection = input
-      method = cases[selection]
+      method = @cases[selection]
       if method == :exit
         puts 'Thanks for using this app'
+        write_games
+        write_authors
         @book_label.save_books_data
         @book_label.save_labels_data
         break

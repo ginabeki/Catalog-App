@@ -1,11 +1,26 @@
 require_relative '../classes/author'
+require 'fileutils'
+require 'json'
+
+FileUtils.mkdir_p('json_data')
+base = "#{Dir.pwd}/json_data"
+File.open("#{base}/authors.json", 'w') unless File.exist?("#{base}/authors.json")
 
 ##
 # This module contains utlity methods for the user to
 # Add author
 # List author
 module AuthorUtility
+  base = "#{Dir.pwd}/json_data"
+  authors_reader = File.read("#{base}/authors.json")
   @authors = []
+
+  unless authors_reader == ''
+    JSON.parse(authors_reader).each do |x|
+      @authors.push(Author.new(x['first_name'], x['last_name']))
+    end
+  end
+
   class << self
     attr_accessor :authors
   end
@@ -37,5 +52,16 @@ IDo you want to add author? Y or N?")
     AuthorUtility.authors.each do |author|
       puts "First Name: #{author.first_name}, Last Name: #{author.last_name}"
     end
+  end
+
+  # Persist data to JSON
+  def write_authors
+    authors = AuthorUtility.authors
+    base = "#{Dir.pwd}/json_data"
+    empty_array = []
+    authors&.each do |e|
+      empty_array << { first_name: e.first_name, last_name: e.last_name }
+    end
+    File.write("#{base}/authors.json", empty_array.to_json, mode: 'w')
   end
 end
