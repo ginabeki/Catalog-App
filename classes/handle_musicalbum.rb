@@ -11,7 +11,6 @@ class HandleMusicAlbum
 
   # Create Music Album & Genre
   def create_music_album
-   
     print 'Publish date of the album [Enter date in format (yyyy-mm-dd)]: '
     publish_date = Date.parse(gets.chomp)
     return unless publish_date
@@ -71,7 +70,7 @@ class HandleMusicAlbum
   def load_albums
     if File.exist?('./json_data/album.json') && File.read('./json_data/album.json') != ''
       JSON.parse(File.read('./json_data/album.json')).map do |album|
-        MusicAlbum.new( album['publish_date'], album['spotify'])
+        MusicAlbum.new(album['publish_date'], album['spotify'])
       end
     else
       []
