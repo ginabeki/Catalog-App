@@ -1,7 +1,7 @@
 CREATE TABLE label (
 	id  INT GENERATED ALWAYS AS IDENTITY,
 	title VARCHAR(50),
-    color VARCHAR(50)
+    color VARCHAR(50),
 	PRIMARY KEY(id)
 );
 
