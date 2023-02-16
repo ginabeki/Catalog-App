@@ -1,8 +1,15 @@
 require_relative 'utilities/game_utility'
 # App is responsible for holding the logic for our app UI
+require './classes/book_label'
 
 class App
+
   include GameUtility
+
+  def initialize
+    @book_label = BookLabel.new
+  end
+
 
   # menu_list provides a list of different options a user can select from
   def menu_list
@@ -22,32 +29,59 @@ class App
 
   # this method calls specifc method depending on the user selection
   def selection_cases
-    cases = { 1 => :list_book,
-              2 => :list_music_albums,
-              3 => :list_games,
-              4 => :list_genres,
-              5 => :list_labels,
-              6 => :list_authors,
-              7 => :add_book,
-              8 => :add_music_album,
-              9 => :add_game,
-              10 => :exit }
-
+    cases = menu_cases
     loop do
       menu_list
       selection = input
       method = cases[selection]
       if method == :exit
         puts 'Thanks for using this app'
+        @book_label.save_books_data
+        @book_label.save_labels_data
         break
       end
       send(method)
     end
   end
 
+  def menu_cases
+    {
+      1 => :list_books,
+      2 => :list_music_albums,
+      3 => :list_games,
+      4 => :list_genres,
+      5 => :list_labels,
+      6 => :list_authors,
+      7 => :add_book,
+      8 => :add_music_album,
+      9 => :add_game,
+      10 => :exit
+    }
+  end
+
   # ask user for input
   # @return the input
   def input
     gets.chomp.to_i
+  end
+
+  def list_books
+    @book_label.list_books
+  end
+
+  def list_labels
+    @book_label.list_labels
+  end
+
+  def add_book
+    @book_label.add_book
+  end
+
+  def save_books_data
+    @book_label.save_books_data
+  end
+
+  def save_labels_data
+    @book_label.save_labels_data
   end
 end

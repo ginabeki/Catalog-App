@@ -23,7 +23,7 @@
 
 # 📖 [Catalog App] <a name="about-project"></a>
 
-> This is a console app project that will help you to keep a record of different types of things you own: books, music albums, movies, and games.
+> This is a console app project to help you to keep a record of different types of things you own: books, music albums, movies, and games.
 
 ## 🛠 Built With <a name="built-with"></a>
 

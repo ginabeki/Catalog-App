@@ -12,4 +12,12 @@ class Label
     @items << item
     item.label = self
   end
+
+  #  custom method that @returns a hash of the attributes to be merged in the save_labels_data method.
+  def to_custom_hash
+    {
+      'Title' => title,
+      'Color' => color
+    }
+  end
 end
