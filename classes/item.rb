@@ -20,25 +20,28 @@ class Item
   # @param genre is the genre object
   def add_genre(genre)
     @genre = genre
+    genre.items.push(self) unless genre.items.include?(self)
   end
 
   # add_source adds a source to the item
   # @param source is the source object
   def add_source(source)
     @source = source
+    source.items.push(self) unless source.items.include?(self)
   end
 
   # add_label adds a label to the item
   # @param label is the label object
   def add_label(label)
     @label = label
+    label.items.push(self) unless label.items.include?(self)
   end
 
   # add_author adds an author to the item
   # @param author is the author object
   def add_author(author)
     @author = author
-    author.items << self
+    author.items << self unless author.items.include?(self)
   end
 
   # move_to_archive change the value of archived if the item
@@ -46,8 +49,6 @@ class Item
   def move_to_archive
     @archived = true if can_be_archived
   end
-
-  private
 
   def can_be_archived?
     current_year = Time.new.year

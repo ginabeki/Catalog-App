@@ -17,10 +17,11 @@ class Game < Item
     @last_played_at = last_played_at
   end
 
-  private
-
   def can_be_archived?
-    super && get_number_of_years(@last_played_at) > 2
+    current_year = Date.today.year
+    two_years_ago = Date.new(current_year - 2)
+
+    super && @last_played < two_years_ago
   end
 
   # Utility function that returns number of years between current date and the date given as param
