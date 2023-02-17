@@ -59,8 +59,6 @@
 
 <!-- Features -->
 
-### Live Demo
-Here is our [Project Demonstration](https://drive.google.com/file/d/1fNbR7qRk2IRTqIK_1MRUqEWLOV4nMGam/view?usp=sharing) video
 
 
 ### Key Features <a name="key-features"></a>
